@@ -1,13 +1,25 @@
 import { View, Text, StyleSheet, TextInput, Pressable } from "react-native";
+import MaskInput from "react-native-mask-input";
 import { useState } from "react";
+import CheckBox from "@react-native-community/checkbox";
 
-export default function Login() {
+export default function Cadastro() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-
+  const [telefone, setTelefone] = useState("");
   return (
     <View style={styles.container}>
+      <View>
+        <Text style={styles.font}>Nome:</Text>
+        <TextInput
+          editable
+          value={nome}
+          maxLength={100}
+          onChange={(text) => setNome(text)}
+          style={styles.input}
+        />
+      </View>
       <View>
         <Text style={styles.font}>E-mail:</Text>
         <TextInput
@@ -16,6 +28,32 @@ export default function Login() {
           maxLength={100}
           onChange={(text) => setEmail(text)}
           style={styles.input}
+        />
+      </View>
+      <View>
+        <Text style={styles.font}>Telefone:</Text>
+        <MaskInput
+          value={telefone}
+          maxLength={13}
+          onChangeText={(textMasked, textUnmasked) => setTelefone(textMasked)}
+          style={styles.input}
+          mask={[
+            "(",
+            /\d/,
+            /\d/,
+            ")",
+            " ",
+            /\d/,
+            /\d/,
+            /\d/,
+            /\d/,
+            /\d/,
+            "-",
+            /\d/,
+            /\d/,
+            /\d/,
+            /\d/,
+          ]}
         />
       </View>
       <View>
@@ -36,7 +74,7 @@ export default function Login() {
           accessibilityLabel="Learn more about this purple button"
           style={styles.button}
         >
-          <Text style={styles.buttonText}>Entrar</Text>
+          <Text style={styles.buttonText}>Cadastro</Text>
         </Pressable>
       </View>
     </View>
@@ -81,5 +119,12 @@ const styles = StyleSheet.create({
   },
   view: {
     alignItems: "center",
+  },
+  checkboxContainer: {
+    flexDirection: "row",
+    marginBottom: 20,
+  },
+  label: {
+    margin: 8,
   },
 });
