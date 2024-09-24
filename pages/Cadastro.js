@@ -3,7 +3,7 @@ import MaskInput from "react-native-mask-input";
 import { useState } from "react";
 import CheckBox from "@react-native-community/checkbox";
 
-export default function Cadastro() {
+export default function Cadastro({navigation}) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -69,9 +69,6 @@ export default function Cadastro() {
       </View>
       <View>
         <Pressable
-          title="Entrar"
-          color="#3A4D6A"
-          accessibilityLabel="Learn more about this purple button"
           style={styles.button}
         >
           <Text style={styles.buttonText}>Cadastro</Text>

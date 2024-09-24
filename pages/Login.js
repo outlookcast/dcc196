@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet, TextInput, Pressable } from "react-native";
+import { View, Text, StyleSheet, TextInput, Pressable, TouchableOpacity } from "react-native";
 import { useState } from "react";
-
-export default function Login() {
+import { Ionicons } from '@expo/vector-icons';
+export default function Login({navigation}) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -31,12 +31,10 @@ export default function Login() {
       </View>
       <View>
         <Pressable
-          title="Entrar"
-          color="#3A4D6A"
-          accessibilityLabel="Learn more about this purple button"
+          onPress={() => navigation.navigate('Cadastro')}
           style={styles.button}
         >
-          <Text style={styles.buttonText}>Entrar</Text>
+          <Text style={styles.buttonText} >Entrar</Text>
         </Pressable>
       </View>
     </View>
@@ -81,5 +79,5 @@ const styles = StyleSheet.create({
   },
   view: {
     alignItems: "center",
-  },
+  }, 
 });
