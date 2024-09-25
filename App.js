@@ -1,6 +1,7 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import { Button, TouchableOpacity, Text } from 'react-native';
 import Login from "./pages/Login";
 import Cadastro from "./pages/Cadastro";
@@ -25,9 +26,7 @@ export default function App() {
           fontSize: 24,
         },
         headerRight: () => (
-          <TouchableOpacity>
-            <Text style={{ color: "#fff", marginRight: 10 }}>Info</Text>
-          </TouchableOpacity>
+          <Ionicons name="person" size={24} color='white' />
         ),
       }}>
         <Stack.Screen name="Login" component={Login} />
