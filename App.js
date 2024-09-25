@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Cadastro from "./pages/Cadastro";
 import NovaAula from "./pages/novaAula";
 import TelaPrincipal from "./pages/TelaPrincipal";
+import Exemplo from "./pages/Exemplo"
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,7 @@ export default function App() {
         <Stack.Screen name="TelaPrincipal" component={TelaPrincipal} />
         <Stack.Screen name="Cadastro" component={Cadastro} />
         <Stack.Screen name="Nova Aula" component={NovaAula}/>
+        <Stack.Screen name="Exemplo" component={Exemplo}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
