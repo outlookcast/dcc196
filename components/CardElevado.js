@@ -11,8 +11,8 @@ const CardElevado = ({ children, style }) => {
 
 const styles = StyleSheet.create({
 card: {
-    width: '85%', 
-    height: 650, 
+    width: '95%', 
+    height: '100%', 
     backgroundColor: "white",
     padding: 20,
     borderRadius: 10, 
