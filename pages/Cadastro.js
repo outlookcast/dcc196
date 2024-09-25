@@ -2,78 +2,79 @@ import { View, Text, StyleSheet, TextInput, Pressable } from "react-native";
 import MaskInput from "react-native-mask-input";
 import { useState } from "react";
 import CheckBox from "@react-native-community/checkbox";
+import CardElevado from "../components/CardElevado";
 
-export default function Cadastro({navigation}) {
+export default function Cadastro({ navigation }) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [telefone, setTelefone] = useState("");
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.font}>Nome:</Text>
-        <TextInput
-          editable
-          value={nome}
-          maxLength={100}
-          onChange={(text) => setNome(text)}
-          style={styles.input}
-        />
-      </View>
-      <View>
-        <Text style={styles.font}>E-mail:</Text>
-        <TextInput
-          editable
-          value={email}
-          maxLength={100}
-          onChange={(text) => setEmail(text)}
-          style={styles.input}
-        />
-      </View>
-      <View>
-        <Text style={styles.font}>Telefone:</Text>
-        <MaskInput
-          value={telefone}
-          maxLength={13}
-          onChangeText={(textMasked, textUnmasked) => setTelefone(textMasked)}
-          style={styles.input}
-          mask={[
-            "(",
-            /\d/,
-            /\d/,
-            ")",
-            " ",
-            /\d/,
-            /\d/,
-            /\d/,
-            /\d/,
-            /\d/,
-            "-",
-            /\d/,
-            /\d/,
-            /\d/,
-            /\d/,
-          ]}
-        />
-      </View>
-      <View>
-        <Text style={styles.font}>Senha:</Text>
-        <TextInput
-          editable
-          value={senha}
-          maxLength={100}
-          onChange={(text) => setSenha(text)}
-          style={styles.input}
-          secureTextEntry
-        />
-      </View>
-      <View>
-        <Pressable
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Cadastro</Text>
-        </Pressable>
-      </View>
+      <CardElevado>
+        <View>
+          <Text style={styles.font}>Nome:</Text>
+          <TextInput
+            editable
+            value={nome}
+            maxLength={100}
+            onChange={(text) => setNome(text)}
+            style={styles.input}
+          />
+        </View>
+        <View>
+          <Text style={styles.font}>E-mail:</Text>
+          <TextInput
+            editable
+            value={email}
+            maxLength={100}
+            onChange={(text) => setEmail(text)}
+            style={styles.input}
+          />
+        </View>
+        <View>
+          <Text style={styles.font}>Telefone:</Text>
+          <MaskInput
+            value={telefone}
+            maxLength={13}
+            onChangeText={(textMasked, textUnmasked) => setTelefone(textMasked)}
+            style={styles.input}
+            mask={[
+              "(",
+              /\d/,
+              /\d/,
+              ")",
+              " ",
+              /\d/,
+              /\d/,
+              /\d/,
+              /\d/,
+              /\d/,
+              "-",
+              /\d/,
+              /\d/,
+              /\d/,
+              /\d/,
+            ]}
+          />
+        </View>
+        <View>
+          <Text style={styles.font}>Senha:</Text>
+          <TextInput
+            editable
+            value={senha}
+            maxLength={100}
+            onChange={(text) => setSenha(text)}
+            style={styles.input}
+            secureTextEntry
+          />
+        </View>
+        <View>
+          <Pressable style={styles.button}>
+            <Text style={styles.buttonText}>Cadastro</Text>
+          </Pressable>
+        </View>
+      </CardElevado>
     </View>
   );
 }
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    justifyContent: "center",
+    alignItems:'center',
     padding: 20,
   },
   input: {
