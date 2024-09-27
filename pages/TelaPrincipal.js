@@ -24,6 +24,12 @@ const TelaPrincipal = ({ navigation }) => {
         >
           <Text style={styles.buttonText}>Exemplo</Text>
         </Pressable>
+        <Pressable
+          onPress={() => navigation.navigate("Lista das Aulas")}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Lista de Aula</Text>
+        </Pressable>
       </CardElevado>
     </View>
   );
