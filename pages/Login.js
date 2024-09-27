@@ -40,7 +40,7 @@ export default function Login({ navigation }) {
           />
         </View>
         <Pressable
-          onPress={() => navigation.navigate("TelaPrincipal")}
+          onPress={() => navigation.navigate("Tela Principal")}
           style={styles.button}
         >
           <Text style={styles.buttonText}>Entrar</Text>
