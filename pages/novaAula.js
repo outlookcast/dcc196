@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   TextInput,
@@ -11,15 +11,20 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import CardElevado from "../components/CardElevado";
+import { AulaContext } from "../components/AulaContext";
 
-const NovaAula = () => {
+
+const NovaAula = ({navigation}) => {
   const [data, setData] = useState(new Date());
+  const [titulo, setTitulo] = useState('');
   const [mostrar, setMostrar] = useState(false);
   const [dataFormatada, setDataFormatada] = useState("");
   const [startTime, setStartTime] = useState("");
+  const [horario, setHorario] = useState('');
   const [startTimeFinal, setStartTimeFinal] = useState("");
   const [durationTime, setDurationTime] = useState("");
   const [inputHeight, setInputHeight] = useState(40);
+  const { adicionarAula } = useContext(AulaContext);
 
   const formatTime = (time) => {
     let formattedTime = time.replace(/[^0-9]/g, "");
@@ -29,6 +34,15 @@ const NovaAula = () => {
     }
     return formattedTime;
   };
+  const criarAula = () => {
+    const novaAula = { titulo, data: dataFormatada, horario: startTime };
+    adicionarAula(novaAula); 
+    setTitulo(""); 
+    setDataFormatada("");
+    setHorario("");
+    navigation.navigate('Tela Principal', { });
+  };
+
   const handleTimeChange = (time, setter) => {
     if (time.length <= 5) {
       const formattedTime = formatTime(time);
@@ -66,7 +80,7 @@ const NovaAula = () => {
             <FontAwesome name="file-o" size={24} color="#3A4D6A" />
             <Text style={styles.text}> Nome da Disciplina</Text>
           </View>
-          <TextInput style={styles.input} placeholder="Título" />
+          <TextInput style={styles.input} placeholder="Título" value={titulo} onChangeText={setTitulo} />
 
           <View style={{ flexDirection: "row" }}>
             <FontAwesome name="file-text-o" size={24} color="#3A4D6A" />
@@ -171,7 +185,7 @@ const NovaAula = () => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.buttonSalvar}
-              onPress={() => console.log("Salvar dados")}
+              onPress={criarAula}
             >
               <Text style={styles.buttonText}>Salvar</Text>
             </TouchableOpacity>
