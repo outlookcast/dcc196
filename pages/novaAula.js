@@ -13,14 +13,13 @@ import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import CardElevado from "../components/CardElevado";
 import { AulaContext } from "../components/AulaContext";
 
-
-const NovaAula = ({navigation}) => {
+const NovaAula = ({ navigation }) => {
   const [data, setData] = useState(new Date());
-  const [titulo, setTitulo] = useState('');
+  const [titulo, setTitulo] = useState("");
   const [mostrar, setMostrar] = useState(false);
   const [dataFormatada, setDataFormatada] = useState("");
   const [startTime, setStartTime] = useState("");
-  const [horario, setHorario] = useState('');
+  const [horario, setHorario] = useState("");
   const [startTimeFinal, setStartTimeFinal] = useState("");
   const [durationTime, setDurationTime] = useState("");
   const [inputHeight, setInputHeight] = useState(40);
@@ -36,11 +35,11 @@ const NovaAula = ({navigation}) => {
   };
   const criarAula = () => {
     const novaAula = { titulo, data: dataFormatada, horario: startTime };
-    adicionarAula(novaAula); 
-    setTitulo(""); 
+    adicionarAula(novaAula);
+    setTitulo("");
     setDataFormatada("");
     setHorario("");
-    navigation.navigate('Tela Principal', { });
+    navigation.navigate("Tela Principal", {});
   };
 
   const handleTimeChange = (time, setter) => {
@@ -80,7 +79,12 @@ const NovaAula = ({navigation}) => {
             <FontAwesome name="file-o" size={24} color="#3A4D6A" />
             <Text style={styles.text}> Nome da Disciplina</Text>
           </View>
-          <TextInput style={styles.input} placeholder="Título" value={titulo} onChangeText={setTitulo} />
+          <TextInput
+            style={styles.input}
+            placeholder="Título"
+            value={titulo}
+            onChangeText={setTitulo}
+          />
 
           <View style={{ flexDirection: "row" }}>
             <FontAwesome name="file-text-o" size={24} color="#3A4D6A" />
@@ -176,21 +180,18 @@ const NovaAula = ({navigation}) => {
             placeholder="Alunos"
             keyboardType="numeric"
           />
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={styles.buttonCancelar}
-              onPress={() => console.log("Ação cancelada")}
-            >
-              <Text style={styles.buttonText}>Cancelar</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.buttonSalvar}
-              onPress={criarAula}
-            >
-              <Text style={styles.buttonText}>Salvar</Text>
-            </TouchableOpacity>
-          </View>
         </CardElevado>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonCancelar}
+          onPress={() => console.log("Ação cancelada")}
+        >
+          <Text style={styles.buttonText}>Cancelar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonSalvar} onPress={criarAula}>
+          <Text style={styles.buttonText}>Salvar</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -236,44 +237,31 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   buttonContainer: {
+    display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 20,
+    justifyContent: "space-around",
+    marginTop: 100,
   },
 
   buttonCancelar: {
     backgroundColor: "red",
     paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
+    borderRadius: 10,
     alignItems: "center",
-    width: "48%",
+    width: "38%",
   },
   buttonSalvar: {
     backgroundColor: "green",
     paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
+    borderRadius: 10,
     alignItems: "center",
-    width: "48%",
+    width: "38%",
   },
 
   buttonText: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
-  },
-  papel: {
-    width: 340,
-    height: 650,
-    backgroundColor: "white",
-    padding: 20,
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 10,
   },
   text: {
     fontSize: 20,
