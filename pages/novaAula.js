@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
+  Modal,
 } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
@@ -24,6 +25,7 @@ const NovaAula = ({ navigation }) => {
   const [durationTime, setDurationTime] = useState("");
   const [inputHeight, setInputHeight] = useState(40);
   const { adicionarAula } = useContext(AulaContext);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const formatTime = (time) => {
     let formattedTime = time.replace(/[^0-9]/g, "");
@@ -39,6 +41,9 @@ const NovaAula = ({ navigation }) => {
     setTitulo("");
     setDataFormatada("");
     setHorario("");
+    setModalVisible(true);
+  };
+  const cancelarAula = () => {
     navigation.navigate("Tela Principal", {});
   };
 
@@ -70,6 +75,10 @@ const NovaAula = ({ navigation }) => {
 
   const abrirPicker = () => {
     setMostrar(true);
+  };
+
+  const fechar = () => {
+    navigation.navigate("Tela Principal", {})
   };
   return (
     <ScrollView>
@@ -185,13 +194,31 @@ const NovaAula = ({ navigation }) => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.buttonCancelar}
-          onPress={() => console.log("Ação cancelada")}
+          onPress={cancelarAula}
         >
           <Text style={styles.buttonText}>Cancelar</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonSalvar} onPress={criarAula}>
           <Text style={styles.buttonText}>Salvar</Text>
         </TouchableOpacity>
+        <Modal
+        animationType="slide" 
+        transparent={true}    
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)} 
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Configuração salva com sucesso</Text>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={fechar}
+            >
+              <Text style={styles.textStyle}>Fechar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
       </View>
     </ScrollView>
   );
@@ -267,6 +294,39 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: "#3A4D6A",
+  },
+  textStyle: {
+    color: "#fff",
+    fontWeight: "bold",
+    textAlign: "center",
+    paddingTop:2,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalView: {
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalText: {
+    fontSize: 18,
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  closeButton: {
+    backgroundColor: "red",
+    padding: 10,
+    borderRadius: 10,
   },
 });
 
