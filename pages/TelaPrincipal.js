@@ -30,7 +30,13 @@ const TelaPrincipal = ({ navigation }) => {
         >
           <Text style={styles.buttonText}>Lista de Aula</Text>
         </Pressable>
-      </CardElevado>
+        <Pressable
+          onPress={() => navigation.navigate("Configurar Disponibilidade")}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Disponibilidadea</Text>
+        </Pressable>
+      </CardElevado> 
     </View>
   );
 };
