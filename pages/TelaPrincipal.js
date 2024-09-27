@@ -36,6 +36,12 @@ const TelaPrincipal = ({ navigation }) => {
         >
           <Text style={styles.buttonText}>Disponibilidadea</Text>
         </Pressable>
+        <Pressable
+          onPress={() => navigation.navigate("Relatorio de Aulas")}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Relatorio</Text>
+        </Pressable>
       </CardElevado> 
     </View>
   );

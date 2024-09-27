@@ -10,6 +10,7 @@ import TelaPrincipal from "./pages/TelaPrincipal";
 import Exemplo from "./pages/Exemplo";
 import ListaAula from "./pages/ListaAula";
 import Disponibilidade from "./pages/Disponibilidade";
+import RelatorioAula from "./pages/RelatorioAula";
 import { AulaProvider } from "./components/AulaContext";
 
 
@@ -44,6 +45,7 @@ export default function App() {
           <Stack.Screen name="Exemplo" component={Exemplo} />
           <Stack.Screen name="Lista das Aulas" component={ListaAula} />
           <Stack.Screen name="Configurar Disponibilidade" component={Disponibilidade} />
+          <Stack.Screen name="Relatorio de Aulas" component={RelatorioAula} />
         </Stack.Navigator>
       </NavigationContainer>
     </AulaProvider>
