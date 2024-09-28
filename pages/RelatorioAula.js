@@ -9,9 +9,8 @@ import {
   Pressable,
 } from "react-native";
 import CardElevado from "../components/CardElevado";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import DateTimePicker from "@react-native-community/datetimepicker";
-
 const RelatorioAula = () => {
   const tableData = [
     {
@@ -137,25 +136,33 @@ const RelatorioAula = () => {
             {
               justifyContent: "center",
               alignSelf: "flex-end",
-              width: 90,
+              width: 130,
               paddingRight: 4,
               height: 30,
             },
           ]}
         >
-          <TouchableOpacity>
+        <TouchableOpacity style={{flexDirection: 'row'}}>
+            <FontAwesome name="filter" size={18} color='#3A4D6A'/>
             <Text style={styles.dateButtonText}>Aplicar filtro</Text>
-          </TouchableOpacity>
+        </TouchableOpacity>
+  
         </View>
-        <Text
-          style={[
-            styles.titulo,
-            { borderBottomWidth: 0, borderTopWidth: 1, paddingTop: 10 },
-          ]}
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            borderTopWidth: 1,
+          }}
         >
-          {" "}
-          Relatório:
-        </Text>
+          <Ionicons name="document-text-outline" size={24} color="#3A4D6A" />
+          <Text
+            style={[styles.titulo, { borderBottomWidth: 0, paddingTop: 10 }]}
+          >
+            {" "}
+            Relatório:
+          </Text>
+        </View>
         <ScrollView>
           <View style={styles.container}>
             <View style={styles.cabecalho}>
