@@ -12,7 +12,8 @@ import ListaAula from "./pages/ListaAula";
 import Disponibilidade from "./pages/Disponibilidade";
 import RelatorioAula from "./pages/RelatorioAula";
 import { AulaProvider } from "./components/AulaContext";
-
+import Perfil from "./pages/Perfil";
+import RelatorioFrequencia from "./pages/RelatorioFrequencia";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,7 +23,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="login"
-          screenOptions={{
+          screenOptions={({ navigation }) => ({
             headerTitleAlign: "center",
             headerStyle: {
               backgroundColor: "#3A4D6A",
@@ -34,9 +35,9 @@ export default function App() {
               fontSize: 24,
             },
             headerRight: () => (
-              <Ionicons name="person" size={24} color="white" />
+              <Ionicons name="person" size={24} color="white" onPress={() => navigation.navigate("Perfil")} />
             ),
-          }}
+          })}
         >
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Tela Principal" component={TelaPrincipal} />
@@ -46,6 +47,8 @@ export default function App() {
           <Stack.Screen name="Lista das Aulas" component={ListaAula} />
           <Stack.Screen name="Configurar Disponibilidade" component={Disponibilidade} />
           <Stack.Screen name="Relatorio de Aulas" component={RelatorioAula} />
+          <Stack.Screen name="Perfil" component={Perfil}/>
+          <Stack.Screen name="Relatório de Frequência" component={RelatorioFrequencia} />
         </Stack.Navigator>
       </NavigationContainer>
     </AulaProvider>
