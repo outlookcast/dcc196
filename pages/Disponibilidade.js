@@ -14,12 +14,66 @@ import { Picker } from "@react-native-picker/picker";
 
 const DiaDaSemana = ({ dia }) => {
   const [isChecked, setIsChecked] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("opcao0");
+  const [horarios, setHorarios] = useState([{ id: 1, value: "opcao0" }]);
 
+  const adicionarHorario = () => {
+    const novoId = horarios.length + 1;
+    setHorarios([...horarios, { id: novoId, value: "opcao0" }]);
+  };
+
+
+  const removerHorario = (id) => {
+    setHorarios(horarios.filter((horario) => horario.id !== id));
+  };
+  const renderHorarios = () => {
+    return (
+      <>
+        {/* Renderiza todos os horários */}
+        {horarios.map((horario) => (
+          <View key={horario.id} style={{ flexDirection: "row", justifyContent: "space-around", alignItems: "center" }}>
+            <Text style={styles.horarioText}>Horário:</Text>
+            <View style={styles.pickerContainer}>
+              <Picker
+                selectedValue={horario.value}
+                style={styles.picker}
+                onValueChange={(itemValue) =>
+                  setHorarios(
+                    horarios.map((h) =>
+                      h.id === horario.id ? { ...h, value: itemValue } : h
+                    )
+                  )
+                }
+              >
+                <Picker.Item label="Nenhum" value="opcao0" />
+                <Picker.Item label="06:00 às 08:00" value="opcao1" />
+                <Picker.Item label="08:00 às 10:00" value="opcao2" />
+                <Picker.Item label="10:00 às 12:00" value="opcao3" />
+                <Picker.Item label="12:00 às 14:00" value="opcao4" />
+                <Picker.Item label="14:00 às 16:00" value="opcao5" />
+                <Picker.Item label="16:00 às 18:00" value="opcao6" />
+                <Picker.Item label="18:00 às 20:00" value="opcao7" />
+                <Picker.Item label="20:00 às 22:00" value="opcao8" />
+              </Picker>
+            </View>
+            <TouchableOpacity onPress={() => removerHorario(horario.id)} style={styles.removerButton}>
+              <FontAwesome name="minus-circle" size={24} color="red" />
+            </TouchableOpacity>
+          </View>
+        ))}
+
+        {/* Botão para adicionar novo horário */}
+        <View style={{ paddingTop: 10, paddingBottom: 7, left: 10 }}>
+          <TouchableOpacity style={styles.button} onPress={adicionarHorario}>
+            <Text> + Adicionar Horário</Text>
+          </TouchableOpacity>
+        </View>
+      </>
+    )
+  };
   return (
     <View style={{ paddingBottom: 10 }}>
       <View style={{ borderWidth: 2, borderRadius: 16 }}>
-        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <Text style={styles.dia}>{dia}</Text>
           <CheckBox
             title=""
@@ -29,46 +83,21 @@ const DiaDaSemana = ({ dia }) => {
             uncheckedColor="red"
           />
         </View>
-        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-          <Text style={styles.horarioText}>Horário:</Text>
-          <View style={styles.pickerContainer}>
-            <Picker
-              selectedValue={selectedValue}
-              style={styles.picker}
-              onValueChange={(itemValue) => setSelectedValue(itemValue)}
-            >
-              <Picker.Item label="Nenhum" value="opcao0" />
-              <Picker.Item label="06:00 às 08:00" value="opcao1" />
-                <Picker.Item label="08:00 às 10:00" value="opcao2" />
-                <Picker.Item label="10:00 às 12:00" value="opcao3" />
-                <Picker.Item label="12:00 às 14:00" value="opcao4" />
-                <Picker.Item label="14:00 às 16:00" value="opcao5" />
-                <Picker.Item label="16:00 às 18:00" value="opcao6" />
-                <Picker.Item label="18:00 às 20:00" value="opcao7" />
-                <Picker.Item label="20:00 às 22:00" value="opcao8" />
-            </Picker>
-          </View>
-        </View>
-        <View style={{ paddingTop: 10, paddingBottom: 7, left: 10 }}>
-          <TouchableOpacity style={styles.button}>
-            <Text> + Adicionar Horário</Text>
-          </TouchableOpacity>
-        </View>
+        {isChecked && renderHorarios()}
       </View>
     </View>
   );
 };
 
-const Disponibilidade = ({navigation}) => {
+const Disponibilidade = ({ navigation }) => {
+  const [modalVisible, setModalVisible] = useState(false);
 
-    const [modalVisible, setModalVisible] = useState(false);
+  const salvar = () => {
+    setModalVisible(false);
+    navigation.navigate("Tela Principal", {});
+  };
 
-    const salvar = () => {
-        setModalVisible(false);
-        navigation.navigate("Tela Principal", {});
-    };
-
-    return (
+  return (
     <ScrollView>
       <View style={styles.container}>
         <CardElevado style={styles.customCard}>
@@ -76,9 +105,7 @@ const Disponibilidade = ({navigation}) => {
             Selecione os dias e horários disponíveis para dar aula
           </Text>
 
-          <View
-            style={{ flexDirection: "row", paddingTop: 10, paddingBottom: 10 }}
-          >
+          <View style={{ flexDirection: "row", paddingTop: 10, paddingBottom: 10 }}>
             <FontAwesome name="calendar" size={24} color="#3A4D6A" />
             <Text style={styles.subtitulo}> Dias da Semana</Text>
           </View>
@@ -93,28 +120,26 @@ const Disponibilidade = ({navigation}) => {
             <TouchableOpacity style={styles.buttonCancelar}>
               <Text style={styles.buttonText}>Cancelar</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonSalvar}  onPress={() => setModalVisible(true)}>
+            <TouchableOpacity style={styles.buttonSalvar} onPress={() => setModalVisible(true)}>
               <Text style={styles.buttonText}>Salvar</Text>
             </TouchableOpacity>
           </View>
-        <Modal
-        animationType="slide" 
-        transparent={true}    
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)} 
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Configuração salva com sucesso</Text>
-            <TouchableOpacity
-              style={styles.closeButton}
-              onPress={salvar}
-            >
-              <Text style={styles.textStyle}>Fechar</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Configuração salva com sucesso</Text>
+                <TouchableOpacity style={styles.closeButton} onPress={salvar}>
+                  <Text style={styles.textStyle}>Fechar</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
         </CardElevado>
       </View>
     </ScrollView>
@@ -140,31 +165,32 @@ const styles = StyleSheet.create({
   },
   dia: {
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 16,
     color: "#3A4D6A",
     padding: 10,
   },
   horarioText: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold",
     color: "#3A4D6A",
-    marginTop: 11,
   },
   pickerContainer: {
-    alignItems: "center",
+    alignItems: "start",
     backgroundColor: "silver",
-    borderRadius: 16,
-    height: 50,
-    width: 200,
+    borderRadius: 10,
+    height: 40,
+    width: 180,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 2,
     shadowRadius: 14,
-    elevation: 10,
+    elevation: 3,
+    padding: 0,
   },
   picker: {
-    width: 200,
-    height: 50,
+    width: 190,
+    height: 30,
+    marginTop: -7,
   },
   button: {
     alignItems: "center",
@@ -205,7 +231,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
     textAlign: "center",
-    paddingTop:2,
+    paddingTop: 2,
   },
   modalContainer: {
     flex: 1,
@@ -231,6 +257,10 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     backgroundColor: "red",
+    padding: 10,
+    borderRadius: 10,
+  },
+  removerButton: {
     padding: 10,
     borderRadius: 10,
   },
