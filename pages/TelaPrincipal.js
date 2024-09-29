@@ -48,7 +48,13 @@ const TelaPrincipal = ({ navigation }) => {
         >
           <Text style={styles.buttonText}>Frequencia</Text>
         </Pressable>
-      </CardElevado> 
+        <Pressable
+          onPress={() => navigation.navigate("Integrações")}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Integrações</Text>
+        </Pressable>
+      </CardElevado>
     </View>
   );
 };

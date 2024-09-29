@@ -14,6 +14,7 @@ import RelatorioAula from "./pages/RelatorioAula";
 import { AulaProvider } from "./components/AulaContext";
 import Perfil from "./pages/Perfil";
 import RelatorioFrequencia from "./pages/RelatorioFrequencia";
+import Integracao from "./pages/Integracao";
 
 const Stack = createNativeStackNavigator();
 
@@ -35,7 +36,12 @@ export default function App() {
               fontSize: 24,
             },
             headerRight: () => (
-              <Ionicons name="person" size={24} color="white" onPress={() => navigation.navigate("Perfil")} />
+              <Ionicons
+                name="person"
+                size={24}
+                color="white"
+                onPress={() => navigation.navigate("Perfil")}
+              />
             ),
           })}
         >
@@ -45,10 +51,17 @@ export default function App() {
           <Stack.Screen name="Nova Aula" component={NovaAula} />
           <Stack.Screen name="Exemplo" component={Exemplo} />
           <Stack.Screen name="Lista das Aulas" component={ListaAula} />
-          <Stack.Screen name="Configurar Disponibilidade" component={Disponibilidade} />
+          <Stack.Screen
+            name="Configurar Disponibilidade"
+            component={Disponibilidade}
+          />
           <Stack.Screen name="Relatorio de Aulas" component={RelatorioAula} />
-          <Stack.Screen name="Perfil" component={Perfil}/>
-          <Stack.Screen name="Relatório de Frequência" component={RelatorioFrequencia} />
+          <Stack.Screen name="Perfil" component={Perfil} />
+          <Stack.Screen
+            name="Relatório de Frequência"
+            component={RelatorioFrequencia}
+          />
+          <Stack.Screen name="Integrações" component={Integracao} />
         </Stack.Navigator>
       </NavigationContainer>
     </AulaProvider>
