@@ -1,33 +1,39 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from "react-native";
 import CardElevado from "../components/CardElevado";
 import { AulaContext } from "../components/AulaContext";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 
-const ListaAula = () => {
+const ListaAula = ({ navigation }) => {
   const { aulas, removerAula, removerTodasAulas } = useContext(AulaContext);
   return (
     <ScrollView contentContainerStyle={styles.contentContainer}>
       <CardElevado>
         {aulas.map((aula, index) => (
           <View key={index} style={styles.card}>
-            <View style={{ flexDirection: "row", alignItems:'center', position:"relative" }}>
-                <FontAwesome name="calendar-o" size={60} color="#3A4D6A" />
+            <View style={{ flexDirection: "column", alignItems: 'start', position: "relative", gap: 6  }}>
+              <View style={{ flexDirection: "row", alignItems: 'center', position: "relative"  }}>
+                <FontAwesome name="calendar-o" size={48} color="#3A4D6A" />
                 <Text style={styles.titulo}> {aula.titulo}</Text>
-                
+              </View>
+              <Text style={styles.data_hora}>Data: {aula.data}</Text>
+              <Text style={styles.data_hora}>Horário: {aula.horario}</Text>
             </View>
-            <View style={{flexDirection: "row", justifyContent:'space-between'}}>
-                <Text style={styles.data_hora}>Data: {aula.data}</Text>
-                <TouchableOpacity onPress={() => removerAula(index)}>
-                    <FontAwesome name="trash" size={28} color="red" />
-                </TouchableOpacity>
-                
+            <View style={{ flexDirection: "column", justifyContent: 'space-between' }}>
+              <TouchableOpacity onPress={() => navigation.navigate('Materiais de Apoio', { aula })}>
+                <FontAwesome name="book" size={28} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('Frequencia', { aula })}>
+                <FontAwesome name="calendar-check-o" size={28} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => removerAula(index)}>
+                <FontAwesome name="trash" size={28} color="red" />
+              </TouchableOpacity>
             </View>
-            <Text style={styles.data_hora}>Horário: {aula.horario}</Text>
           </View>
         ))}
         <TouchableOpacity style={styles.excluirTudoButton} onPress={removerTodasAulas}>
-            <Text style={styles.excluirTudoText}>Excluir todos</Text>
+          <Text style={styles.excluirTudoText}>Excluir todos</Text>
         </TouchableOpacity>
       </CardElevado>
     </ScrollView>
@@ -36,12 +42,12 @@ const ListaAula = () => {
 
 const styles = StyleSheet.create({
 
-    contentContainer: {
-        flexGrow: 1,
-        justifyContent: "flex-start",
-        alignItems: "center",
-        padding: 20,
-      },
+  contentContainer: {
+    flexGrow: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    padding: 20,
+  },
   card: {
     width: "100%",
     padding: 20,
@@ -53,6 +59,8 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 5,
     marginBottom: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   titulo: {
     fontSize: 18,
@@ -63,7 +71,7 @@ const styles = StyleSheet.create({
   data_hora: {
     fontSize: 16,
   },
-  numero:{
+  numero: {
     position: 'absolute'
   },
   excluirTudoButton: {
@@ -71,7 +79,7 @@ const styles = StyleSheet.create({
     padding: 15,
     marginBottom: 10,
     alignItems: "center",
-    position:"absolute",
+    position: "absolute",
     bottom: 0,
     width: "80%",
     transform: [{ translateX: 55 }],
