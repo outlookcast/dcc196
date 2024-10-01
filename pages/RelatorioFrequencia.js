@@ -7,12 +7,13 @@ import {
   TouchableOpacity,
   TextInput,
   Pressable,
+  Modal,
 } from "react-native";
 import CardElevado from "../components/CardElevado";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-const RelatorioFrequencia = () => {
+const RelatorioFrequencia = ({navigation}) => {
   const tableData = [
     {
       data: "10/09/2024",
@@ -47,6 +48,12 @@ const RelatorioFrequencia = () => {
     }
     setMostrarTermino(false);
     setDataFormatada2(dataSelecionada.toLocaleDateString("pt-BR"));
+  };
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const fechar = () => {
+    navigation.navigate("Tela Principal", {})
   };
   return (
     <View style={styles.container}>
@@ -187,9 +194,29 @@ const RelatorioFrequencia = () => {
               marginTop: 160,
             },
           ]}
+          onPress={() => setModalVisible(true)}
         >
           <Text style={styles.dateButtonText}>Extrair Relatório</Text>
         </TouchableOpacity>
+
+        <Modal
+        animationType="slide" 
+        transparent={true}    
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)} 
+      >
+          <View style={styles.modalContainer}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Relatório extraído com sucesso</Text>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={fechar}
+            >
+              <Text style={styles.textStyle}>Fechar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        </Modal>
       </CardElevado>
     </View>
   );
@@ -248,6 +275,33 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "bold",
     overflow: "visible",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalView: {
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalText: {
+    fontSize: 18,
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  closeButton: {
+    backgroundColor: "red",
+    padding: 10,
+    borderRadius: 10,
   },
 });
 
