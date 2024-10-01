@@ -19,12 +19,6 @@ const TelaPrincipal = ({ navigation }) => {
           <Text style={styles.buttonText}>Nova Aula</Text>
         </Pressable>
         <Pressable
-          onPress={() => navigation.navigate("Exemplo")}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Exemplo</Text>
-        </Pressable>
-        <Pressable
           onPress={() => navigation.navigate("Lista das Aulas")}
           style={styles.button}
         >
@@ -53,6 +47,12 @@ const TelaPrincipal = ({ navigation }) => {
           style={styles.button}
         >
           <Text style={styles.buttonText}>Integrações</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => navigation.navigate("Cadastrar Sala")}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Cadastrar Sala</Text>
         </Pressable>
       </CardElevado>
     </View>

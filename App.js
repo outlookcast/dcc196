@@ -17,6 +17,7 @@ import RelatorioFrequencia from "./pages/RelatorioFrequencia";
 import MateriaisApoio from "./pages/MateriaisApoio";
 import Frequencia from "./pages/Frequencia";
 import Integracao from "./pages/Integracao";
+import CadastroSala from "./pages/CadastroSala";
 
 const Stack = createNativeStackNavigator();
 
@@ -63,6 +64,7 @@ export default function App() {
           <Stack.Screen name="Materiais de Apoio" component={MateriaisApoio} />
           <Stack.Screen name="Frequencia" component={Frequencia} />
           <Stack.Screen name="Integrações" component={Integracao} />
+          <Stack.Screen name="Cadastrar Sala" component={CadastroSala} />
         </Stack.Navigator>
       </NavigationContainer>
     </AulaProvider>
